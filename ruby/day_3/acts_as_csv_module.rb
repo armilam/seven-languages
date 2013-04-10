@@ -26,9 +26,10 @@ module ActsAsCsv
       read 
     end
 
+# Exercise for day 3
     def each
       self.csv_contents.each do |row|
-        csv_row = CsvRow.new self.headers, row
+        csv_row = CsvRow.new Hash[self.headers.zip(row)]
         yield csv_row
       end
     end
@@ -41,21 +42,20 @@ class RubyCsv  # no inheritance! You can mix it in
 end
 
 class CsvRow
-  attr_accessor :headers
   attr_accessor :row
 
-  def initialize headers, row
-    self.headers = headers
+  def initialize row
     self.row = row
   end
 
   def method_missing name, *args
-    index = self.headers.index name.to_s
-    self.row[index]
+    self.row[name.to_s]
   end
 end
 
 m = RubyCsv.new
 puts m.headers.inspect
 puts m.csv_contents.inspect
-m.each { |row| puts row.one }
+
+# Test for exercise for day 3
+m.each { |row| puts row.two }

@@ -32,4 +32,6 @@ end
 def grep(filename, phrase)
   line_number = 0
   File.open(filename) { |file| file.readlines("\n").each { |line| line_number+=1; puts "#{line_number}: #{line}" unless line.match(phrase).nil? } }
+#  File.open(filename) { |file| file.readlines("\n").each { |line, line_number| puts "#{line_number}: #{line}" unless line.match(phrase).nil? } }
+# look into to_enum.with_index
 end
